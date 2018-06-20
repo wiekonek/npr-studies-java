@@ -1,13 +1,28 @@
 package npr.wiekonek.semaphores;
 
 public class CountingSemaphore implements Semaphore {
-    @Override
-    public void P() throws InterruptedException {
 
+    private int _s;
+
+    public CountingSemaphore(int s) {
+        _s = s;
     }
 
     @Override
-    public void V() throws InterruptedException {
+    public void P() throws InterruptedException {
+        synchronized (this) {
+            while (_s <= 0) {
+                wait();
+            }
+            _s--;
+        }
+    }
 
+    @Override
+    public void V() {
+        synchronized (this) {
+            _s++;
+            notify();
+        }
     }
 }

@@ -23,9 +23,9 @@ public class SimpleTask implements Runnable {
         while(true) {
             try {
                 _semaphore.P();
-                System.out.print("┌SimpleTask [" + _id + "] in critical section.\n");
+                System.out.print(">> [" + _id + "]" + " SimpleTask in critical section.\n");
                 Thread.sleep(500);
-                System.out.print("└SimpleTask [" + _id + "] out of critical section.\n");
+                System.out.print("<< [" + _id + "]" + " SimpleTask out of critical section.\n");
                 _semaphore.V();
                 Thread.sleep(10);
             } catch (InterruptedException e) {
